@@ -8,7 +8,7 @@ import typer
 from manito_api import ManitoArm
 
 
-def main(host: str = "localhost", port: int = 8080):
+def main(host: str = "localhost", port: int = 8000):
     arm = ManitoArm(f"http://{host}:{port}")
     arm.home()
 
