@@ -1,0 +1,6 @@
+(movehorizontal garra xygarra xyblue)
+(moverabajo garra zgarra zblue)
+(tomar garra blueb xyblue zblue)
+(moverarriba garra zblue zgreen)
+(movehorizontal garra xyblue xygreen)
+(apilar garra blueb greenb xygreen zgreen)

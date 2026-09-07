@@ -1,9 +1,9 @@
 import os
 import typer
 from manito_api import ManitoArm
-
+import time
 colors = ["green", "blue", "red", "white", "yellow", "purple"]
-positions = {"Initial": [0,0.41,0.90], "garra": [0,0.41,0.90]}
+positions = {"Initial": [0,0.41,0.50], "garra": [0,0.41,0.50]}
 
 
 def move_to(body):
@@ -27,7 +27,16 @@ def accion(action):
     print(positions)
     
     action = action.strip("()")
+    print("Siguiente")
     
+    #Go Up first
+    if action == "First":
+        move_to({
+                "action": "move_to",
+                "x": 0.1,
+                "y": 0.40,
+                "z": 0.6,
+                })
     ## (movehorizontal garra xygarra xygreen)
     if action.startswith("movehorizontal"):
         
@@ -59,7 +68,7 @@ def accion(action):
         if "garra" in toname:
             toname = "Initial"
               
-        pos = [positions["garra"][0], positions["garra"][1], positions[toname][2]-0.7]
+        pos = [positions["garra"][0], positions["garra"][1], positions[toname][2]+0.15]
         print(pos)
         
         move_to({
@@ -81,7 +90,7 @@ def accion(action):
         if "garra" in toname:
             toname = "Initial"
               
-        pos = [positions["garra"][0], positions["garra"][1], positions[toname][2]-0.7]
+        pos = [positions["garra"][0], positions["garra"][1], positions[toname][2]+0.15]
         print(pos)
         
         move_to({
@@ -93,6 +102,15 @@ def accion(action):
         
     if action.startswith("soltar"):
         arm.gripper(False)
+    
+    if action.startswith("desapilar"):
+            arm.gripper(True)
+    
+    if action.startswith("apilar"):
+            arm.gripper(False)
+    
+    time.sleep(2)
+    
 
 def worldstatus():
     response = arm._session.get(f"{arm.url}/api/v1/state", timeout=10)
@@ -102,10 +120,9 @@ def worldstatus():
 
 
 arm = ManitoArm(f"http://localhost:8000")
-arm.home()
 
 
-archivo_solucion= "goal-scenario1.pddl.soln"
+archivo_solucion= "goal-scenario2.pddl.soln"
 
 if os.path.exists(archivo_solucion):
             with open(archivo_solucion, 'r') as archivo:
@@ -114,5 +131,9 @@ if os.path.exists(archivo_solucion):
 else:
     raise FileNotFoundError(f"Solution file not found: {archivo_solucion}")
 
-for i in pasos:
-    accion(i)
+while True:
+    ## Nuestra version de arm.home()
+    accion("first")
+    
+    for i in pasos:
+        accion(i)
