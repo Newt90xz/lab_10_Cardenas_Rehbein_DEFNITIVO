@@ -1,5 +1,5 @@
 (define (problem goal-undoo-verde-azul)
-    ; Alonso, mi idea en este almenos es una desapilacion simple, 2 bloques empiezan apilados (Verde sobre azul) y los desapila para colocar otro encima del verde
+    ; Alonso, mi idea es, 2 bloques empiezan apilados (Verde sobre azul) y los desapila para colocar el blanco encima del verde
 
     (:domain manito)
 
