@@ -1,0 +1,6 @@
+(movehorizontal garra xygarra xywhite)
+(moverabajo garra zgarra zwhite)
+(desapilar garra redb xywhite zwhite whiteb)
+(moverarriba garra zwhite zgarra)
+(movehorizontal garra xywhite xydisp1)
+(soltar garra redb xydisp1 zgarra)

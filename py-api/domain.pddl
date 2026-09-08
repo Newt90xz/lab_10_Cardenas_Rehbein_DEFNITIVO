@@ -19,8 +19,8 @@
         (desocupado ?garra)
         
         (camino ?donde ?hasta)
-        (alt ?al1 ?al2))
-
+        (alt ?al1 ?al2)
+    )
 
     (:action movehorizontal
         :parameters (?garra ?donde ?hasta)
@@ -105,7 +105,6 @@
         )
     )
 
-    
     (:action desapilar
         :parameters (?garra ?bloque ?donde ?alt ?bloque2)
         :precondition (and
@@ -122,9 +121,8 @@
             (libre ?bloque)
             (apilado ?bloque2)
             (torre ?bloque2 ?bloque)
-            )
-            
-            :effect (and
+        )
+        :effect (and
             (not (torre ?bloque2 ?bloque))
             (not (libre ?bloque))
             (not (apilado ?bloque2))
@@ -134,7 +132,7 @@
             (en ?bloque ?garra)
             (not (en ?bloque ?donde))
             (not (pisob ?bloque ?alt))
-            )
+        )
     )
 
     (:action apilar
@@ -149,9 +147,8 @@
             
             (ocupado ?garra)
             (libre ?bloque2)
-            )
-            
-            :effect (and
+        )
+        :effect (and
             (torre ?bloque2 ?bloque)
             (libre ?bloque)
             (apilado ?bloque2)
@@ -161,6 +158,6 @@
             (not (en ?bloque ?garra))
             (en ?bloque ?donde)
             (pisob ?bloque ?alt)
-            )
+        )
     )
 )

@@ -2,9 +2,14 @@ import os
 import typer
 from manito_api import ManitoArm
 import time
+import math
+
 colors = ["green", "blue", "red", "white", "yellow", "purple"]
 positions = {"Initial": [0,0.41,0.50], "garra": [0,0.41,0.50]}
 
+def truncdeci(numero, decimales):
+    factor = 10 ** decimales
+    return math.trunc(numero * factor) / factor
 
 def move_to(body):
     response = arm._session.post(
@@ -30,11 +35,11 @@ def accion(action):
     print("Siguiente")
     
     #Go Up first
-    if action == "First":
+    if action == "first":
         move_to({
                 "action": "move_to",
-                "x": 0.1,
-                "y": 0.40,
+                "x": positions["garra"][0],
+                "y": positions["garra"][1],
                 "z": 0.6,
                 })
     ## (movehorizontal garra xygarra xygreen)
@@ -70,7 +75,23 @@ def accion(action):
               
         pos = [positions["garra"][0], positions["garra"][1], positions[toname][2]+0.15]
         print(pos)
-        
+        yfactor = 0
+        haspassed = False
+        if isclawclosed():
+            for color in colors:
+                if color in positions:
+                    xgarra = truncdeci(positions["garra"][0],3)
+                    xbloque = truncdeci(positions[color][0],3)
+                    ygarra = truncdeci(positions["garra"][1],3)
+                    ybloque = truncdeci(positions[color][1],3)
+                    if ybloque - 0.2 <= ygarra <= ybloque + 0.2 and xbloque - 0.2 <= xgarra <= xbloque + 0.2 :
+                        if not haspassed:
+                            haspassed = True
+                            continue
+                        yfactor += 1
+                        
+        print(yfactor)
+        pos[2] = pos[2] + (yfactor*0.04)
         move_to({
         "action": "move_to",
         "x": pos[0],
@@ -80,6 +101,8 @@ def accion(action):
         
     if action.startswith("tomar"):
         arm.gripper(True)
+        time.sleep(2)
+        return
         
     if action.startswith("moverarriba"):
         ## Mover xy garra a xycolor/otro 
@@ -108,8 +131,8 @@ def accion(action):
     
     if action.startswith("apilar"):
             arm.gripper(False)
-    
-    time.sleep(2)
+            time.sleep(2)
+            return
     
 
 def worldstatus():
@@ -118,11 +141,17 @@ def worldstatus():
     worldjson=response.json()
     return worldjson
 
+def isclawclosed():
+    response = arm._session.get(f"{arm.url}/api/status", timeout=10)
+    response.raise_for_status()
+    clawboolean = response.json()
+    return clawboolean["gripper"]
+
 
 arm = ManitoArm(f"http://localhost:8000")
 
 
-archivo_solucion= "goal-scenario2.pddl.soln"
+archivo_solucion= "goal-scenario3.pddl.soln"
 
 if os.path.exists(archivo_solucion):
             with open(archivo_solucion, 'r') as archivo:
@@ -131,9 +160,10 @@ if os.path.exists(archivo_solucion):
 else:
     raise FileNotFoundError(f"Solution file not found: {archivo_solucion}")
 
-while True:
-    ## Nuestra version de arm.home()
-    accion("first")
-    
-    for i in pasos:
-        accion(i)
+
+
+
+accion("first")  
+for i in pasos:
+    accion(i)
+accion("first")

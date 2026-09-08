@@ -30,7 +30,7 @@ def solver(dominio, objetivo):
 
 
 dominio_test = 'domain.pddl'
-goal_test = 'goal-scenario2.pddl'
+goal_test = 'goal-scenario4.pddl'
 
 print(goal_test)
 solver(dominio_test, goal_test)

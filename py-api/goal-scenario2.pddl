@@ -34,9 +34,6 @@
         
         (alt zblue zgarra)
         (alt zgarra zblue)
-        
-        (alt zblue zgreen)
-        (alt zgreen zblue)
 
         (dismover garra)
 
