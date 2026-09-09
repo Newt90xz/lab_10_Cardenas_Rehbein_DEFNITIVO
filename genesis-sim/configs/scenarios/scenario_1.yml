@@ -10,46 +10,39 @@ environment:
 robots:
   - name: "Manito"
     urdf_path: "assets/robots/manito/manito.urdf"
-    position: [0.0, 0.0, 0.7]
+    position: [0.0, 0.0, -0.04]
     fixed: true
     is_main: true
 
-props:
-  # Tablero 
-  - name: "Mesa Tablero"
-    urdf_path: "assets/props/table_top.urdf"
-    position: [0.0, 0.0, -0.315]
-    euler: [0.0, 0.0, 90.0]
-    surface: "smooth"
-
-  # Patas — color gris
-  - name: "Mesa Patas"
-    urdf_path: "assets/props/table_legs.urdf"
-    position: [0.0, 0.0, -0.315]
-    euler: [0.0, 0.0, 0.0]
-    surface: "rough"
-    color: [0.5, 0.5, 0.5]
-    euler: [0.0, 0.0, 90.0]
-
 objects:
-  - type: "mesh"
-    name: "Plano Cartesiano"
-    file: "assets/props/grid_plane_1m.obj"
-    scale: 1.0
-    pos: [0.0, 0.0, 0.701]
-    euler: [0.0, 0.0, 0.0]
-    fixed: true
-    convexify: false
-    surface: "smooth"
-    texture: "assets/props/grid_plane_1m.png"
-
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.0, 0.20, 0.0]
+    surface: "rough"
+    color: [0.1, 0.8, 0.3]
+    name: "green"
+  
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.20, 0.40, 0.0]
+    surface: "rough"
+    color: [0.8, 0.1, 0.3]
+    name: "red"
 
   - type: "box"
     size: [0.04, 0.04, 0.04]
-    pos: [0.0, 0.20, 0.75]
+    pos: [0.20, 0.40, 0.0]
     surface: "rough"
-    color: [0.1, 0.8, 0.3]
-    name: "Cubo Verde"
+    color: [0.1, 0.3, 0.8]
+    name: "blue"
+
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.20, 0.40, 0.0]
+    surface: "rough"
+    color: [0.8, 0.8, 0.8]
+    name: "white"
+
 
 
 stream_camera:

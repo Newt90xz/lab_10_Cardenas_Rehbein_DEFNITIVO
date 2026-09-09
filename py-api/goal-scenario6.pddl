@@ -1,6 +1,4 @@
-(define (problem goal-undoo-verde-azul)
-    ; Alonso, mi idea es, 2 bloques empiezan apilados (Verde sobre azul) y los desapila para colocar el blanco encima del verde
-
+(define (problem goal6)
     (:domain manito)
 
     (:objects

@@ -1,7 +1,7 @@
-# configs/scenarios/scenario_3.yml
+# configs/scenarios/default.yml
 viewer:
-  camera_pos: [1.8, 1.8, 1.8]
-  camera_lookat: [0.0, 0.0, 0.0]
+  camera_pos: [1.5, 1.5, 1.5]
+  camera_lookat: [0.0, 0.0, 0.40]
 
 environment:
   plane: true
@@ -10,35 +10,47 @@ environment:
 robots:
   - name: "Manito"
     urdf_path: "assets/robots/manito/manito.urdf"
-    position: [0.0, 0.0, 0.0]
+    position: [0.0, 0.0, -0.04]
     fixed: true
     is_main: true
 
 objects:
-  - name: "Cubo Rojo"
-    type: "box"
-    pos: [0.15, 0.15, 0.02]
+  - type: "box"
     size: [0.04, 0.04, 0.04]
-    color: [1.0, 0.2, 0.2]
+    pos: [0.0, 0.20, 0.0]
     surface: "rough"
-  - name: "Cubo Verde"
-    type: "box"
-    pos: [0.15, 0.0, 0.02]
+    color: [0.1, 0.8, 0.3]
+    name: "green"
+  
+  - type: "box"
     size: [0.04, 0.04, 0.04]
-    color: [0.2, 1.0, 0.2]
+    pos: [0.20, 0.20, 0.0]
     surface: "rough"
-  - name: "Cubo Azul"
-    type: "box"
-    pos: [0.15, -0.15, 0.02]
+    color: [0.8, 0.1, 0.3]
+    name: "red"
+
+  - type: "box"
     size: [0.04, 0.04, 0.04]
-    color: [0.2, 0.2, 1.0]
+    pos: [0.10, 0.30, 0.0]
     surface: "rough"
+    color: [0.1, 0.3, 0.8]
+    name: "blue"
+
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.30, 0.0, 0.0]
+    surface: "rough"
+    color: [0.8, 0.8, 0.8]
+    name: "white"
+  
+
+
 
 stream_camera:
-  pos: [1.5, 1.5, 1.2]
-  lookat: [0.1, 0.0, 0.0]
+  pos: [1.0, 1.0, 1.5]
+  lookat: [0.0, 0.0, 0.40]
   res: [640, 480]
 
 objectives:
-  - id: "apliar_en_orden"
-    description: "Apila los cubos en orden: verde, azul y rojo."
+  - id: "apilar_cubo 1"
+    description: "Apilar el cubo verde sobre el rojo"

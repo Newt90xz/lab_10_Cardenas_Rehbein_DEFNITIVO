@@ -1,45 +1,56 @@
-# configs/scenarios/scenario_4.yml
+# configs/scenarios/default.yml
 viewer:
-  camera_pos: [2.0, 0.0, 1.5]
-  camera_lookat: [0.0, 0.0, 0.2]
+  camera_pos: [1.5, 1.5, 1.5]
+  camera_lookat: [0.0, 0.0, 0.40]
 
 environment:
   plane: true
   gravity: [0.0, 0.0, -9.81]
 
 robots:
-  - name: "Manito 1"
+  - name: "Manito"
     urdf_path: "assets/robots/manito/manito.urdf"
-    position: [0.0, 0.0, 0.0]
-    euler: [0.0, 0.0, 0]
+    position: [0.0, 0.0, -0.04]
     fixed: true
     is_main: true
-  - name: "Manito 2"
-    urdf_path: "assets/robots/manito/manito.urdf"
-    position: [0.50, 0.0, 0.0]
-    euler: [0.0, 0.0, 0]
-    fixed: true
-    is_main: false
 
 objects:
-  - name: "Cubo Rojo"
-    type: "box"
-    pos: [0.0, 0.2, 0.02]
+  - type: "box"
     size: [0.04, 0.04, 0.04]
-    color: [1.0, 0.0, 0.0]
+    pos: [0.0, 0.20, 0.0]
     surface: "rough"
-  - name: "Cubo Amarillo"
-    type: "box"
-    pos: [0.50, 0.2, 0.02]
+    color: [0.1, 0.8, 0.3]
+    name: "green"
+  
+  - type: "box"
     size: [0.04, 0.04, 0.04]
-    color: [1.0, 0.84, 0.0]
+    pos: [0.3, 0.0, 0.04]
     surface: "rough"
+    color: [0.8, 0.1, 0.3]
+    name: "red"
+
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.10, 0.30, 0.0]
+    surface: "rough"
+    color: [0.1, 0.3, 0.8]
+    name: "blue"
+
+  - type: "box"
+    size: [0.04, 0.04, 0.04]
+    pos: [0.3, 0.0, 0.0]
+    surface: "rough"
+    color: [0.8, 0.8, 0.8]
+    name: "white"
+  
+
+
 
 stream_camera:
-  pos: [1.5, 1.5, 1.0]
-  lookat: [0.0, 0.0, 0.2]
+  pos: [1.0, 1.0, 1.5]
+  lookat: [0.0, 0.0, 0.40]
   res: [640, 480]
 
 objectives:
-  - id: "levantar_cubos_por_separado"
-    description: "Manito 1 debe tomar el cubo rojo y levantarlo. Luego Manito 2 debe tomar el cubo amarillo y levantarlo."
+  - id: "Desapilar1"
+    description: "Desapila el bloque rojo del blanco y sueltalo sobre un espacio libre"

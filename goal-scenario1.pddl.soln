@@ -1,5 +1,0 @@
-(movehorizontal garra xygarra xybloque)
-(moverabajo garra arr aba)
-(tomar garra greenb xybloque aba)
-(moverarriba garra aba arr)
-(movehorizontal garra xybloque xygarra)

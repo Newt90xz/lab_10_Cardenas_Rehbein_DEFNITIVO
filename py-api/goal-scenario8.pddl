@@ -1,13 +1,11 @@
-(define (problem goal7)
-    ; Esto seria una version plus del escenario 5, donde hay una torre de 3 en vez de 2
-
+(define (problem goal8)
     (:domain manito)
 
     (:objects
-        greenb blueb redb
+        greenb blueb whiteb
         garra
-        xygarra xygreen xydisp1 xydisp2
-        zgarra zgreen
+        xygarra xygreen xywhite xydisp1
+        zgarra zgreen zwhite zdisp1
     )
 
     (:init
@@ -17,47 +15,52 @@
 
         (en blueb xygreen)
         (pisob blueb zgreen)
-        (apilado blueb)
-
-        (en redb xygreen)
-        (pisob redb zgreen)
-        (libre redb)
+        (libre blueb)
 
         (torre greenb blueb)
-        (torre blueb redb)
+
+        (en whiteb xywhite)
+        (pisob whiteb zwhite)
+        (libre whiteb)
 
         (pos garra xygarra)
         (pisog garra zgarra)
+
         (dismover garra)
         (desocupado garra)
 
         (libre xydisp1)
-        (libre xydisp2)
 
         (camino xygarra xygreen)
         (camino xygreen xygarra)
 
-        (camino xygarra xydisp1)
-        (camino xydisp1 xygarra)
-
-        (camino xygarra xydisp2)
-        (camino xydisp2 xygarra)
+        (camino xygarra xywhite)
+        (camino xywhite xygarra)
 
         (camino xygreen xydisp1)
         (camino xydisp1 xygreen)
 
-        (camino xygreen xydisp2)
-        (camino xydisp2 xygreen)
+        (camino xywhite xygreen)
+        (camino xygreen xywhite)
+        
+        (camino xywhite xydisp1)
+        (camino xydisp1 xywhite)
 
         (alt zgarra zgreen)
         (alt zgreen zgarra)
+
+        (alt zgarra zwhite)
+        (alt zwhite zgarra)
+
+        (alt zgarra zdisp1)
+        (alt zdisp1 zgarra)
     )
 
     (:goal
         (and
-            (libre greenb)
             (en blueb xydisp1)
-            (en redb xydisp2)
+            (pisob blueb zdisp1)
+            (torre whiteb greenb)
         )
     )
 )

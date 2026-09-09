@@ -1,4 +1,4 @@
-(define (problem goal-green-red-blue)
+(define (problem goal2)
     (:domain manito)
 
     (:objects

@@ -1,9 +1,11 @@
 import subprocess
 import os
+import argparse
+from pathlib import Path
 
 
 def solver(dominio, objetivo):
-    consola = ["pyperplan", dominio, objetivo]
+    consola = ["pyperplan", "-H", "hff", "-s", "gbf", dominio, objetivo]
     try:
         solucion = subprocess.run(consola, capture_output=True, text=True)
         if solucion.returncode != 0:
@@ -28,9 +30,14 @@ def solver(dominio, objetivo):
         print(f'No se ha podido encontrar el ejecutable: pyperplan')
         return False
 
+## uv run python main.py --solvefile "goal.pddl"
+parser = argparse.ArgumentParser()
+parser.add_argument("--goalfile", default="goal-scenario9.pddl")
+args = parser.parse_args()
+
+goal_test = Path(args.goalfile)
 
 dominio_test = 'domain.pddl'
-goal_test = 'goal-scenario4.pddl'
 
 print(goal_test)
 solver(dominio_test, goal_test)

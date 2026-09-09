@@ -1,4 +1,4 @@
-(define (problem goal-green-red-blue)
+(define (problem goal3)
     (:domain manito)
 
     (:objects
@@ -12,19 +12,25 @@
         (en greenb xygreen)
         (pisob greenb zgreen)
         (libre greenb)
+
         (en blueb xyblue)
         (pisob blueb zblue)
         (libre blueb)
+
         (en redb xyred)
         (pisob redb zred)
         (libre redb)
+
         (en whiteb xywhite)
         (pisob whiteb zwhite)
         (libre whiteb)
+
         (pos garra xygarra)
         (pisog garra zgarra)
+
         (dismover garra)
         (desocupado garra)
+
         (camino xygreen xygarra)
         (camino xygarra xygreen)
         (camino xygarra xyblue)
@@ -33,18 +39,7 @@
         (camino xyred xygarra)
         (camino xygarra xywhite)
         (camino xywhite xygarra)
-        (camino xygreen xyblue)
-        (camino xyblue xygreen)
-        (camino xygreen xyred)
-        (camino xyred xygreen)
-        (camino xygreen xywhite)
-        (camino xywhite xygreen)
-        (camino xyblue xyred)
-        (camino xyred xyblue)
-        (camino xyblue xywhite)
-        (camino xywhite xyblue)
-        (camino xyred xywhite)
-        (camino xywhite xyred)
+
         (alt zgarra zgreen)
         (alt zgreen zgarra)
         (alt zblue zgarra)

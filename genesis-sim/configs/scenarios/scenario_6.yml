@@ -24,31 +24,25 @@ objects:
   
   - type: "box"
     size: [0.04, 0.04, 0.04]
-    pos: [0.20, 0.20, 0.0]
+    pos: [0.3, 0.0, 0.04]
     surface: "rough"
     color: [0.8, 0.1, 0.3]
     name: "red"
 
   - type: "box"
     size: [0.04, 0.04, 0.04]
-    pos: [0.10, 0.30, 0.0]
+    pos: [0.0, 0.20, 0.04]
     surface: "rough"
     color: [0.1, 0.3, 0.8]
     name: "blue"
 
   - type: "box"
     size: [0.04, 0.04, 0.04]
-    pos: [0.40, 0.0, 0.0]
+    pos: [0.3, 0.0, 0.0]
     surface: "rough"
     color: [0.8, 0.8, 0.8]
     name: "white"
   
-  - type: "box"
-    size: [0.04, 0.04, 0.04]
-    pos: [0.40, 0.0, 0.04]
-    surface: "rough"
-    color: [0.0, 0.8, 0.8]
-    name: "other"
 
 
 
@@ -58,5 +52,5 @@ stream_camera:
   res: [640, 480]
 
 objectives:
-  - id: "apilar_cubo 1"
-    description: "Apilar el cubo verde sobre el rojo"
+  - id: "Intercambio1"
+    description: "Mueve el cubo azul a xydisp1 y apila el blanco sobre el verde"

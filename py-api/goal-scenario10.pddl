@@ -1,23 +1,17 @@
-(define (problem goal5)
+(define (problem goal10)
     (:domain manito)
 
     (:objects
-        greenb blueb redb whiteb
+        greenb
         garra
-        xygarra xygreen xyred xywhite xydisp1
-        zgarra zgreen zblue
+        xygarra xygreen xydisp1
+        zgarra zgreen zdisp1
     )
 
     (:init
         (en greenb xygreen)
         (pisob greenb zgreen)
-        (apilado greenb)
-
-        (en blueb xygreen)
-        (pisob blueb zgreen)
-        (libre blueb)
-
-        (torre greenb blueb)
+        (libre greenb)
 
         (pos garra xygarra)
         (pisog garra zgarra)
@@ -29,22 +23,24 @@
 
         (camino xygarra xygreen)
         (camino xygreen xygarra)
+
         (camino xygreen xydisp1)
         (camino xydisp1 xygreen)
+
         (camino xygarra xydisp1)
         (camino xydisp1 xygarra)
 
         (alt zgarra zgreen)
         (alt zgreen zgarra)
-        
-        (alt zgarra zblue)
-        (alt zblue zgarra)
+
+        (alt zgarra zdisp1)
+        (alt zdisp1 zgarra)
     )
 
     (:goal
         (and
-            (libre greenb)
-            (en blueb xydisp1)
+            (en greenb xydisp1)
+            (pisob greenb zdisp1)
         )
     )
 )

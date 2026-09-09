@@ -1,11 +1,12 @@
 import os
-import typer
 from manito_api import ManitoArm
 import time
 import math
+import argparse
+from pathlib import Path
 
 colors = ["green", "blue", "red", "white", "yellow", "purple"]
-positions = {"Initial": [0,0.41,0.50], "garra": [0,0.41,0.50]}
+positions = {"Initial": [0,0.41,0.50], "garra": [0,0.41,0.50], "disp1": [-0.2,0.2,0.0], "disp2": [-0.3,0.1,0.0] }
 
 def truncdeci(numero, decimales):
     factor = 10 ** decimales
@@ -23,19 +24,17 @@ def move_to(body):
 
 def accion(action):
     response = worldstatus()
-    
+    print(action)
     # Extract important blocks position.
     for color in colors:
         if color in action:
             positions[color] = response["entities"][color]
     
-    print(positions)
-    
     action = action.strip("()")
     print("Siguiente")
     
-    #Go Up first
-    if action == "first":
+    #Go Up
+    if action == "default":
         move_to({
                 "action": "move_to",
                 "x": positions["garra"][0],
@@ -89,6 +88,15 @@ def accion(action):
                             haspassed = True
                             continue
                         yfactor += 1
+        else:
+            for color in colors:
+                            if color in positions:
+                                xgarra = truncdeci(positions["garra"][0],3)
+                                xbloque = truncdeci(positions[color][0],3)
+                                ygarra = truncdeci(positions["garra"][1],3)
+                                ybloque = truncdeci(positions[color][1],3)
+                                if ybloque - 0.2 <= ygarra <= ybloque + 0.2 and xbloque - 0.2 <= xgarra <= xbloque + 0.2 :
+                                    yfactor += 1
                         
         print(yfactor)
         pos[2] = pos[2] + (yfactor*0.04)
@@ -151,7 +159,13 @@ def isclawclosed():
 arm = ManitoArm(f"http://localhost:8000")
 
 
-archivo_solucion= "goal-scenario3.pddl.soln"
+## uv run python main.py --solvefile "goal.pddl.soln"
+parser = argparse.ArgumentParser()
+parser.add_argument("--solvefile", default="goal-scenario1.pddl.soln")
+args = parser.parse_args()
+
+archivo_solucion = Path(args.solvefile)
+
 
 if os.path.exists(archivo_solucion):
             with open(archivo_solucion, 'r') as archivo:
@@ -161,9 +175,7 @@ else:
     raise FileNotFoundError(f"Solution file not found: {archivo_solucion}")
 
 
-
-
-accion("first")  
+accion("default")  
 for i in pasos:
     accion(i)
-accion("first")
+accion("default")
